@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <form method="POST" >
+     {% csrf_token %}
+    <div class="">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-2"> <h5>Editar SubCategoria</h5></div>
+
+
+                            {% crispy form %}
+                            <button type="submit" class="btn btn-warning"> <i class="fa fa-save"></i> Guardar</button>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+</form>
+{% endblock %}

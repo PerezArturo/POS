@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <form method="POST" >
+     {% csrf_token %}
+    <div class="">
+              <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-2"> <h5>¿Eliminar {{ cat.categoria }} {{ cat.descripcion }}?</h5></div>
+
+                            <button type="submit" class="btn btn-danger"> <i class="fa fa-trash-alt"></i> Si, Eliminar</button>
+                            <a href="{% url 'inv:lista-subcat' %}" class="btn btn-secondary " role="button"><i class="fa fa-times"></i> Cancelar</a>
+
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+</form>
+{% endblock %}

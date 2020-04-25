@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse
+from django.contrib import messages
 
 from .models import Categoria, SubCategoria, Marca, UnidadMedida, Producto
 from .forms import (CategoriaForm, EditarCategoriaForm, SubCategoriaForm, EditarSubCategoriaForm,
@@ -154,12 +155,22 @@ class EliminarSubCategoriaView(LoginRequiredMixin, DeleteView):
         return reverse('inv:lista-subcat')
 
 
-class EliminarMarcaView(LoginRequiredMixin, DeleteView):
-    model = Marca
+def marca_inactivar(request, id):
+    marca = Marca.objects.filter(pk=id).first()
+    contexto = {}
     template_name = "marca/eliminar.html"
-    pk_url_kwarg = "marca_pk"
-    context_object_name = "cat"
-    login_url = "login"
 
-    def get_success_url(self):
-        return reverse('inv:lista-marca')
+    if not marca:
+        return redirect("inv:lista-marca")
+
+    if request.method == 'GET':
+        contexto = {'obj': marca}
+
+    if request.method == 'POST':
+        marca.estado = False
+        marca.save()
+        messages.success(request, 'Marca Inactivada')
+        return redirect("inv:lista-marca")
+
+    return render(request, template_name, contexto)
+

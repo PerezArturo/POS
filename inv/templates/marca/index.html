@@ -39,7 +39,7 @@
                         <td>{{ item.fm }}</td>
                         <td>
                             <a href="{% url 'inv:editar-marca' item.id %}" class="btn btn-warning " role="button"><i class="fa fa-edit"></i></a>
-                            <a href="{% url 'inv:eliminar-marca' item.id %}" class="btn btn-danger " role="button"><i class="fa fa-trash-alt"></i></a>
+                            <a href="{% url 'inv:eliminar-marca' item.id %}" class="btn btn-danger " role="button"><i class="fa fa-thumbs-down"></i></a>
                         </td>
                         </tr>
                     {% endfor %}
